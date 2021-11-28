@@ -1,0 +1,68 @@
+<%- include("../partials/header")  %>     
+<%- include("../partials/navbar")  %>     
+
+    <div class="container">
+
+        <section>
+            <h4 class="display-4"><%=product.name %> </h4>
+        </section>
+
+       <%- include("../partials/flash.ejs") %> 
+        <div class="row products" \\style="border: 1px solid black;">
+                <div class="col-lg-5" \\style="margin:5px auto">
+                    
+                    <div class="card" style="width: 18rem;">
+                        <img src="<%=product.img %> " class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title"><%= product.price  %></h5>
+                          <p class="card-text"><%= product.description  %></p>
+                          <a href="#" class="btn btn-primary">Buy</a>
+                          <a href="#" class="btn btn-secondary">Add to Cart</a>
+                          <a href="/products/<%=product._id %>/edit " class="btn btn-warning">Edit</a>
+                          <br><br>
+                          <form action="/products/<%= product._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-danger">Delete</button>
+                          </form>
+
+                        </div>
+                    </div>
+
+                </div> 
+
+                <div class="col-lg-7">
+
+                    <h1 style="margin-left:90px;">Leave a Review</h1>
+
+                    <form action="/products/<%= product._id %>/review " method="POST"  style="max-width:70%;margin: 15px auto;" novalidate>
+                        <div class="mb-3">
+                            <label for="Rating" class="form-label"><b>Rating</b></label>
+                            <input type="range" class="form-range" min="0" max="5" id="rating" name="rating" required>
+                          </div>                          
+                          <div class="mb-3">
+                            <label for="Comment" class="form-label"><b>Comment</b></label>
+                            <textarea class="form-control" id="description" cols="35" rows="3" name="comment" required></textarea>
+                          </div>
+                          <button class="btn btn-success">Create</button>
+                      </form>
+
+                      <div class="mb-3 mt-3">
+                        <%for(review of product.reviews){%>
+                            <script>console.log(review.rating);</script>
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                  <%= review.user %> 
+                                </div>
+                                <div class="card-body">
+                                  <h5 class="card-title">Rating :<%=review.rating%></h5>
+                                  <p class="card-text"><%=review.comment%></p>
+                                </div>
+                              </div>
+            
+                        <%}%>
+                    </div>
+
+                </div>   
+        </div>
+    </div>
+    
+<%- include("../partials/footer")  %>     

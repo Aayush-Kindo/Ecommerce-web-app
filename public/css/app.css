@@ -1,0 +1,13 @@
+.products {
+    margin: 5px auto;
+  }
+
+.products .card img {
+    padding: 15px;
+    height: 220px;
+  }
+
+.cart .card img{
+    padding: 8px;
+    height: 110px;
+}
